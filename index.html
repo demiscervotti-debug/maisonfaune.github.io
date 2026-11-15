@@ -4,38 +4,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Maison Faune – La Conciergerie de vos Protégés · Sisteron et sa région</title>
-  <meta name="description" content="Garde exclusive à domicile, promenades et transport privé d’animaux sur Sisteron et sa région : visites, forfaits 7 jours, équidés. Une courte vidéo chaque jour pour les forfaits.">
   <link rel="preconnect" href="https://googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
   <link href="https://googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root { --sg: #4f6142; --sm: #6f8465; --sl: #e3eadb; --bg: #f5efe3; --bd: #e2d6bf; --ink: #2f3a2b; --gold: #d9c398; }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body { margin: 0; font: 18px/1.65 "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
     .w { max-width: 980px; margin: 0 auto; padding: 0 22px; }
     h1, h2, h3 { font-family: Fraunces, Georgia, serif; color: var(--sg); line-height: 1.25; font-weight: 600; }
-    .menu-container { position: fixed; top: 18px; right: 20px; z-index: 1000; }
-    summary.menu-toggle { list-style: none; background: rgba(47, 58, 43, 0.94); color: var(--bg); border: 1px solid var(--gold); border-radius: 8px; padding: 0.65rem 1.2rem; font: 600 1rem "Source Sans 3", sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.32); user-select: none; }
+
+    /* Menu déroulant fixe en haut à droite */
+    .menu-container { position: fixed; top: 18px; right: 20px; z-index: 9999; }
+    summary.menu-toggle { list-style: none; background: rgba(47, 58, 43, 0.95); color: var(--bg); border: 1px solid var(--gold); border-radius: 8px; padding: 0.65rem 1.2rem; font: 600 1rem "Source Sans 3", sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.35); }
     summary.menu-toggle::-webkit-details-marker { display: none; }
-    summary.menu-toggle:hover { background: var(--sg); }
-    .dropdown-list { display: none; position: absolute; right: 0; top: calc(100% + 8px); background: #fbf8f1; border: 1px solid var(--bd); border-radius: 10px; min-width: 265px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); padding: 0.4rem 0; overflow: hidden; }
-    details[open] .dropdown-list { display: block; }
-    .dropdown-list a { display: block; width: 100%; text-align: left; text-decoration: none; border-bottom: 1px solid #efe7d6; padding: 0.68rem 1.2rem; color: var(--ink); font: 600 0.96rem "Source Sans 3", sans-serif; }
+    .dropdown-list { position: absolute; right: 0; top: calc(100% + 8px); background: #fbf8f1; border: 1px solid var(--bd); border-radius: 10px; min-width: 265px; box-shadow: 0 10px 30px rgba(0,0,0,0.28); padding: 0.4rem 0; }
+    .dropdown-list a { display: block; padding: 0.68rem 1.2rem; color: var(--ink); text-decoration: none; font: 600 0.96rem "Source Sans 3", sans-serif; border-bottom: 1px solid #efe7d6; }
     .dropdown-list a:last-child { border-bottom: none; }
     .dropdown-list a:hover { background: var(--sl); color: var(--sg); }
     .dropdown-list a.highlight { background: var(--sg); color: var(--bg); }
-    .dropdown-list a.highlight:hover { background: #3f4f35; }
-    .view-section { display: none; }
-    .view-section.active { display: block; }
-    #page-accueil.active { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; background: #1f261d; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
-    #page-accueil img { max-width: 100%; max-height: calc(100vh - 80px); width: auto; height: auto; object-fit: contain; display: block; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
-    .cover-subtitle { margin: 14px 0 0; font: italic 1.2rem Fraunces, Georgia, serif; color: var(--gold); text-align: center; letter-spacing: 0.03em; }
-    .inner-header { background: var(--sg); color: var(--bg); padding: 26px 0; border-bottom: 3px solid var(--gold); }
-    .inner-header .w { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-right: 130px; }
-    .brand-link { font: 600 1.45rem Fraunces, Georgia, serif; color: var(--bg); letter-spacing: 0.1em; background: none; border: 0; padding: 0; cursor: pointer; }
-    .back-btn { background: rgba(255,255,255,0.14); color: var(--bg); border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 0.45rem 0.9rem; font: 600 0.9rem "Source Sans 3", sans-serif; cursor: pointer; }
-    .back-btn:hover { background: rgba(255,255,255,0.25); }
-    .page-content { padding: 42px 0 54px; min-height: 62vh; }
+
+    /* Page de garde plein écran nette */
+    .cover { min-height: 100vh; background: #1f261d; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .cover img { max-width: 100%; max-height: 82vh; width: auto; height: auto; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+    .cover-subtitle { margin: 16px 0 0; font: italic 1.25rem Fraunces, Georgia, serif; color: var(--gold); }
+
+    /* Sections */
+    section { padding: 54px 0; border-bottom: 1px solid var(--bd); scroll-margin-top: 20px; }
     h1 { font-size: clamp(1.85rem, 4vw, 2.5rem); margin: 0 0 1.2rem; }
     h2 { font-size: 1.75rem; margin: 0 0 1.1rem; }
     h3 { font-size: 1.22rem; color: var(--sm); margin: 1.6rem 0 0.5rem; }
@@ -45,8 +41,12 @@
     li::marker { color: var(--sm); }
     blockquote { margin: 1.4rem 0; padding: 0.3rem 0 0.3rem 1.2rem; border-left: 4px solid var(--sm); font: italic 1.25rem Fraunces, Georgia, serif; color: var(--sm); }
     .note { font-size: 0.93rem; font-style: italic; color: #5b6654; margin-top: 0.8rem; }
+
+    /* Grille présentation */
     .intro-grid { display: grid; grid-template-columns: 1fr 290px; gap: 2rem; align-items: center; margin-bottom: 1.5rem; }
-    .intro-photo { width: 100%; border-radius: 14px; box-shadow: 0 8px 24px rgba(47, 58, 43, 0.14); border: 1px solid var(--bd); display: block; }
+    .intro-photo { width: 100%; border-radius: 14px; box-shadow: 0 8px 24px rgba(47, 58, 43, 0.14); border: 1px solid var(--bd); }
+
+    /* Tableaux */
     table { width: 100%; border-collapse: collapse; background: #fff; margin: 1.1rem 0; font-size: 0.97rem; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     th { background: var(--sm); color: #fff; text-align: left; padding: 0.75rem 0.95rem; font-weight: 600; }
     td { padding: 0.8rem 0.95rem; border-bottom: 1px solid var(--bd); vertical-align: top; }
@@ -55,6 +55,8 @@
     td:last-child { width: 22%; }
     .price { display: block; font-weight: 700; color: var(--sg); font-size: 1.08rem; }
     td small { display: block; color: #6b7365; }
+
+    /* Encadrés et Formulaire */
     .contact-card { background: #fbf8f1; border: 1px solid var(--bd); border-radius: 12px; padding: 1.4rem 1.6rem; margin: 1.2rem 0; }
     .qualif-box { background: var(--sl); border-left: 4px solid var(--sg); padding: 1rem 1.3rem; border-radius: 0 8px 8px 0; margin: 1.2rem 0; }
     fieldset { border: 1px solid var(--bd); border-radius: 10px; margin: 1.2rem 0; padding: 1rem 1.2rem 1.2rem; background: #fbf8f1; }
@@ -66,58 +68,56 @@
     label.c { font-weight: 400; display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.5rem 0; }
     label.c input { margin-top: 0.35rem; }
     button.submit-btn { background: var(--sg); color: var(--bg); border: 0; border-radius: 8px; padding: 0.95rem 1.8rem; font: 600 1.05rem inherit; cursor: pointer; margin-top: 1rem; }
-    button.submit-btn:hover { background: #3f4f35; }
-    footer { padding: 42px 20px 52px; text-align: center; font-size: 0.94rem; color: #5b6654; background: #efe7d6; border-top: 1px solid var(--bd); display: none; flex-direction: column; align-items: center; justify-content: center; }
-    footer p { margin: 0.35rem auto; text-align: center; max-width: 680px; }
+
+    /* Pied de page centré */
+    footer { padding: 45px 20px 55px; text-align: center; font-size: 0.94rem; color: #5b6654; background: #efe7d6; border-top: 1px solid var(--bd); }
+    footer p { margin: 0.35rem auto; text-align: center; }
     .owl-emblem { width: 135px; height: auto; margin: 0 auto 1rem; display: block; }
-    .footer-tagline { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: 0.14em; color: var(--sg); font-size: 1.05rem; margin-bottom: 0.2rem; }
-    .footer-sub { font: italic 1.05rem Fraunces, Georgia, serif; color: var(--sm); margin-bottom: 0.7rem; }
+    .footer-tagline { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: 0.14em; color: var(--sg); font-size: 1.05rem; }
+    .footer-sub { font: italic 1.05rem Fraunces, Georgia, serif; color: var(--sm); margin-bottom: 0.8rem; }
+
     @media (max-width: 760px) {
       .intro-grid { grid-template-columns: 1fr; }
       .intro-photo { max-width: 340px; margin: 0 auto; }
-      .cover-subtitle { font-size: 1rem; }
       thead { display: none; }
       tr { display: block; border: 1px solid var(--bd); margin: 0.7rem 0; background: #fff; }
       td { display: block; width: auto !important; border: 0; padding: 0.4rem 0.9rem; }
       td:first-child { padding-top: 0.75rem; }
-      tbody tr:nth-child(even) td { background: #fff; }
     }
   </style>
 </head>
 <body>
+
   <details class="menu-container" id="menuBox">
     <summary class="menu-toggle">☰ Menu</summary>
     <div class="dropdown-list">
-      <a href="#page-accueil" onclick="openPage('page-accueil')">Accueil</a>
-      <a href="#page-engagements" onclick="openPage('page-engagements')">Maison Faune et ses engagements</a>
-      <a href="#page-visites" onclick="openPage('page-visites')">Comment se passent les visites</a>
-      <a href="#page-tarifs" onclick="openPage('page-tarifs')">Visite à la carte</a>
-      <a href="#page-forfaits" onclick="openPage('page-forfaits')">Forfaits 7 jours (-10 %)</a>
-      <a href="#page-equides" onclick="openPage('page-equides')">Tarifs Équidés</a>
-      <a href="#page-transport" onclick="openPage('page-transport')">Transport &amp; Options</a>
-      <a href="#page-cgv" onclick="openPage('page-cgv')">CGV &amp; Déplacements</a>
-      <a href="#page-contacts" onclick="openPage('page-contacts')">Contacts</a>
-      <a href="#page-reservation" class="highlight" onclick="openPage('page-reservation')">Réservation en ligne</a>
+      <a href="#accueil">Accueil</a>
+      <a href="#engagements">Maison Faune et ses engagements</a>
+      <a href="#visites">Comment se passent les visites</a>
+      <a href="#tarifs">Visite à la carte</a>
+      <a href="#forfaits">Forfaits 7 jours (-10 %)</a>
+      <a href="#equides">Tarifs Équidés</a>
+      <a href="#transport">Transport &amp; Options</a>
+      <a href="#cgv">CGV &amp; Déplacements</a>
+      <a href="#contacts">Contacts</a>
+      <a href="#reservation" class="highlight">Réservation en ligne</a>
     </div>
   </details>
 
-  <section id="page-accueil" class="view-section active">
+  <header id="accueil" class="cover">
     <img src="hero-sisteron.jpg" alt="Maison Faune - La Conciergerie pour vos protégés">
     <p class="cover-subtitle">Garde exclusive à domicile, promenades &amp; transport privé</p>
-  </section>
+  </header>
 
-  <section id="page-engagements" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+  <main class="w">
+    <section id="engagements">
       <h1>Partez serein. Votre compagnon reste chez lui, choyé comme un roi.</h1>
       <div class="intro-grid">
         <div>
           <p>Fini le chenil, la cage et la boule au ventre. Avec <strong>Maison Faune</strong>, je suis votre unique interlocuteur. Je viens chez vous une à deux fois par jour et, pour les forfaits, je vous envoie chaque jour une courte vidéo de votre compagnon, directement sur votre téléphone.</p>
           <p>Maison Faune est une conciergerie dédiée à offrir des services exceptionnels pour vos animaux de compagnie sur <strong>Sisteron et sa région</strong>. Que vous ayez besoin de promenades quotidiennes, de soins attentionnés ou de visites régulières, je traite vos protégés comme des membres de la famille.</p>
         </div>
-        <div>
-          <img src="maison-noir-blanc.jpg" alt="Maison Faune - Garde exclusive à domicile" class="intro-photo">
-        </div>
+        <div><img src="maison-noir-blanc.jpg" alt="Maison Faune" class="intro-photo"></div>
       </div>
       <h2>Maison Faune et ses engagements</h2>
       <h3>Le départ en vacances ne devrait pas se vivre la gorge serrée</h3>
@@ -129,39 +129,7 @@
       <h3>Une présence attentive, dans le respect de ses habitudes</h3>
       <ul>
         <li><strong>Chez lui, avec ses habitudes.</strong> Avec sa gamelle, son panier, ses horaires et, surtout, une présence attentive et affectueuse.</li>
-        <li><strong>Des nouvelles chaque jour.</strong> Pour les forfaits 7 jours, une courte vidéo vous est envoyée quotidiennement, par WhatsApp ou SMS selon votre choix : vous le voyez manger, jouer, ronronner ou pâturer.</li>
-        <li><strong>Un seul visage.</strong> Le même intervenant vous accompagne du début à la fin. Pas de rotation, pas d’inconnu.</li>
-        <li><strong>Qualifications officielles.</strong> Titulaire de l’ACACED (chiens, chats et autres animaux de compagnie d’espèces domestiques) et du certificat de compétence pour le transport d’animaux vivants (TAV). Cela ne remplace pas un vétérinaire : au moindre doute, votre vétérinaire est contacté.</li>
-        <li><strong>Votre maison n’est pas oubliée.</strong> L’option <em>Maison Veillée</em> comprend le courrier, l’arrosage des plantes, la gestion des volets et un contrôle visuel simple. Il ne s’agit ni de gardiennage ni d’une garantie anti-cambriolage.</li>
-        <li><strong>Joignable 7j/7.</strong> Chaque jour, de 8 h à 20 h, je réponds à vos messages et partage les nouvelles de vos compagnons. Pendant votre séjour, une ligne directe reste accessible à tout moment en cas d’urgence ou d’imprévu sur votre trajet de retour.</li>
-        <li><strong>Une exigence de terrain.</strong> Trente ans de protocoles, de ponctualité et de zéro improvisation, pour le bien-être de votre compagnon.</li>
-      </ul>
-    </main>
-  </section>
-
-  <section id="page-visites" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
-      <h2>Comment se passent les visites ?</h2>
-      <h3>Une visite, concrètement</h3>
-      <p>À chaque passage : accueil et contrôle visuel, nettoyage des gamelles, préparation du repas, eau fraîche renouvelée, câlins si l’animal est réceptif, jeux et stimulation. Aucun contact n’est forcé si l’animal se montre réticent.</p>
-      <h3>Nos services en un coup d’œil</h3>
-      <table>
-        <thead><tr><th>Service</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Visites à domicile</strong></td><td><strong>Présence</strong> : une visite d’environ 30 minutes, comprenant une sortie hygiénique pour le chien (environ 10 minutes ou plus).</td></tr>
-          <tr><td><strong>Promenades</strong></td><td><strong>Grand Air</strong> : marche exclusive et passage au domicile.</td></tr>
-          <tr><td><strong>Forfaits 7 jours</strong></td><td>Présence, Sérénité et Grand Air, avec 10 % de remise.</td></tr>
-          <tr><td><strong>Équidés</strong></td><td>Visites au pré, au paddock ou avec box, ainsi que la formule Tout-en-un.</td></tr>
-          <tr><td><strong>Transport et accompagnement</strong></td><td>Accompagnement vétérinaire, temps d’attente et transferts longue distance.</td></tr>
-          <tr><td><strong>Options</strong></td><td>Maison Veillée et nettoyage spécialisé de vivarium, aquarium ou bassin.</td></tr>
-        </tbody>
-      </table>
-    </main>
-  </section>
-  <section id="page-tarifs" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+    <section id="tarifs">
       <h2>Animaux de compagnie</h2>
       <h3>Visite à la carte</h3>
       <table>
@@ -173,12 +141,9 @@
         </tbody>
       </table>
       <p class="note"><strong>Dimanches et jours fériés :</strong> Prestations à la carte majorées de +10 € par intervention.</p>
-    </main>
-  </section>
+    </section>
 
-  <section id="page-forfaits" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+    <section id="forfaits">
       <h2>Forfaits de 7 jours et plus – 10 % de remise</h2>
       <table>
         <thead><tr><th>Prestation</th><th>Détails</th><th>Tarif</th></tr></thead>
@@ -190,12 +155,9 @@
       </table>
       <p class="note">10 % de remise sur les forfaits de 7 jours. Aucune majoration les dimanches et jours fériés pour les forfaits. Les forfaits Présence et Sérénité sont calculés sur la base d’un animal par foyer. Suppléments : +10 €/jour par chien supplémentaire ; +5 €/jour par chat ou NAC supplémentaire.</p>
       <p><strong>Votre Journal de Bord souvenir.</strong> À l’issue de chaque forfait, un compte rendu détaillé retrace le déroulement du séjour, les habitudes observées, les moments de complicité et le suivi bien-être de vos protégés.</p>
-    </main>
-  </section>
+    </section>
 
-  <section id="page-equides" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+    <section id="equides">
       <h2>Équidés et forfaits combinés</h2>
       <table>
         <thead><tr><th>Prestation</th><th>Détails</th><th>Tarif</th></tr></thead>
@@ -216,12 +178,8 @@
         <li>Les tâches équines particulières font l’objet d’un accord et d’un devis tenant compte du temps réel.</li>
       </ul>
       <p class="note"><strong>Dimanches et jours fériés :</strong> Prestations à la carte majorées de +10 € par intervention (aucune majoration pour les forfaits).</p>
-    </main>
-  </section>
-
-  <section id="page-transport" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+    </section>
+    <section id="transport">
       <h2>Transport, accompagnement et options</h2>
       <table>
         <thead><tr><th>Prestation</th><th>Détails</th><th>Tarif</th></tr></thead>
@@ -234,11 +192,9 @@
         </tbody>
       </table>
       <p class="note"><strong>Dimanches et jours fériés :</strong> +25 % pour les transports et temps d’attente. Une demande particulière ? Une prestation personnalisée peut être étudiée sur devis.</p>
-    </main>
-  </section>
-  <section id="page-cgv" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+    </section>
+
+    <section id="cgv">
       <h2>Conditions générales, déplacements et mentions légales</h2>
       <h3>Précisions commerciales (CGV)</h3>
       <ul>
@@ -269,12 +225,9 @@
           <li>Certificat de compétence pour le Transport d’Animaux Vivants (<strong>TAV</strong>).</li>
         </ul>
       </div>
-    </main>
-  </section>
+    </section>
 
-  <section id="page-contacts" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+    <section id="contacts">
       <h2>Contacts et informations légales</h2>
       <div class="contact-card">
         <p><strong>Maison Faune · Demis Cervotti</strong> (Entrepreneur individuel)</p>
@@ -284,12 +237,9 @@
         <p><strong>Site internet :</strong> <a href="https://maisonfaune.fr">www.maisonfaune.fr</a></p>
         <p class="note">TVA non applicable, art. 293 B du CGI · Médiateur de la consommation et Conditions Générales de Vente complètes remis en annexe de chaque devis.</p>
       </div>
-    </main>
-  </section>
+    </section>
 
-  <section id="page-reservation" class="view-section">
-    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
-    <main class="w page-content">
+    <section id="reservation">
       <h2>Demande de réservation en ligne</h2>
       <p>Remplissez ce formulaire sans engagement (aucun paiement requis). Votre demande préparera automatiquement votre message à destination de <strong>info@maisonfaune.fr</strong> et je vous recontacterai sous 24 h.</p>
       <form id="bookingForm" onsubmit="sendReservation(event)">
@@ -327,10 +277,10 @@
         </fieldset>
         <button type="submit" class="submit-btn">Envoyer ma demande de réservation</button>
       </form>
-    </main>
-  </section>
+    </section>
+  </main>
 
-  <footer id="mainFooter">
+  <footer>
     <img src="chouette.png" alt="Emblème Maison Faune" class="owl-emblem">
     <p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p>
     <p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p>
@@ -339,35 +289,12 @@
   </footer>
 
   <script>
-    function openPage(pageId) {
-      var sections = document.querySelectorAll('.view-section');
-      for (var i = 0; i < sections.length; i++) {
-        sections[i].classList.remove('active');
-      }
-      var target = document.getElementById(pageId);
-      if (target) {
-        target.classList.add('active');
-      }
-      var footer = document.getElementById('mainFooter');
-      footer.style.display = (pageId === 'page-accueil') ? 'none' : 'flex';
-      var menuBox = document.getElementById('menuBox');
-      if (menuBox) {
-        menuBox.removeAttribute('open');
-      }
-      window.scrollTo(0, 0);
+    var links = document.querySelectorAll('.dropdown-list a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function() {
+        document.getElementById('menuBox').removeAttribute('open');
+      });
     }
-    window.addEventListener('hashchange', function() {
-      var hash = window.location.hash.replace('#', '');
-      if (hash && document.getElementById(hash)) {
-        openPage(hash);
-      }
-    });
-    document.addEventListener('click', function(event) {
-      var menuBox = document.getElementById('menuBox');
-      if (menuBox && !menuBox.contains(event.target)) {
-        menuBox.removeAttribute('open');
-      }
-    });
     function sendReservation(e) {
       e.preventDefault();
       var nom = document.getElementById('nom').value;
