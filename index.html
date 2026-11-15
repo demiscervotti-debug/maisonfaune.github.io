@@ -9,151 +9,31 @@
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
   <link href="https://googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --sg: #4f6142;
-      --sm: #6f8465;
-      --sl: #e3eadb;
-      --bg: #f5efe3;
-      --bd: #e2d6bf;
-      --ink: #2f3a2b;
-      --gold: #d9c398;
-    }
+    :root { --sg: #4f6142; --sm: #6f8465; --sl: #e3eadb; --bg: #f5efe3; --bd: #e2d6bf; --ink: #2f3a2b; --gold: #d9c398; }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font: 18px/1.65 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-    }
+    body { margin: 0; font: 18px/1.65 "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
     .w { max-width: 980px; margin: 0 auto; padding: 0 22px; }
     h1, h2, h3 { font-family: Fraunces, Georgia, serif; color: var(--sg); line-height: 1.25; font-weight: 600; }
-
-    /* Bouton Menu déroulant flottant */
-    .menu-container {
-      position: fixed;
-      top: 18px;
-      right: 20px;
-      z-index: 1000;
-    }
-    .menu-toggle {
-      background: rgba(47, 58, 43, 0.94);
-      color: var(--bg);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 0.65rem 1.2rem;
-      font: 600 1rem "Source Sans 3", sans-serif;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.32);
-      margin: 0;
-    }
+    .menu-container { position: fixed; top: 18px; right: 20px; z-index: 1000; }
+    .menu-toggle { background: rgba(47, 58, 43, 0.94); color: var(--bg); border: 1px solid var(--gold); border-radius: 8px; padding: 0.65rem 1.2rem; font: 600 1rem "Source Sans 3", sans-serif; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.32); }
     .menu-toggle:hover { background: var(--sg); }
-    .dropdown-list {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: calc(100% + 8px);
-      background: #fbf8f1;
-      border: 1px solid var(--bd);
-      border-radius: 10px;
-      min-width: 265px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      padding: 0.4rem 0;
-      overflow: hidden;
-    }
+    .dropdown-list { display: none; position: absolute; right: 0; top: calc(100% + 8px); background: #fbf8f1; border: 1px solid var(--bd); border-radius: 10px; min-width: 265px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); padding: 0.4rem 0; overflow: hidden; }
     .dropdown-list.open { display: block; }
-    .dropdown-list button {
-      display: block;
-      width: 100%;
-      text-align: left;
-      background: none;
-      border: 0;
-      border-bottom: 1px solid #efe7d6;
-      padding: 0.68rem 1.2rem;
-      color: var(--ink);
-      font: 600 0.96rem "Source Sans 3", sans-serif;
-      cursor: pointer;
-      margin: 0;
-    }
+    .dropdown-list button { display: block; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid #efe7d6; padding: 0.68rem 1.2rem; color: var(--ink); font: 600 0.96rem "Source Sans 3", sans-serif; cursor: pointer; }
     .dropdown-list button:last-child { border-bottom: none; }
     .dropdown-list button:hover { background: var(--sl); color: var(--sg); }
     .dropdown-list button.highlight { background: var(--sg); color: var(--bg); }
     .dropdown-list button.highlight:hover { background: #3f4f35; }
-
-    /* Gestion des vues */
     .view-section { display: none; }
     .view-section.active { display: block; }
-
-    /* Page de garde 100% verrouillée sans défilement */
-    #page-accueil.active {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background: #1f261d;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    #page-accueil img {
-      max-width: 100%;
-      max-height: calc(100vh - 80px);
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      border-radius: 4px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    }
-    .cover-subtitle {
-      margin: 14px 0 0;
-      font: italic 1.2rem Fraunces, Georgia, serif;
-      color: var(--gold);
-      text-align: center;
-      letter-spacing: 0.03em;
-    }
-
-    /* En-tête des pages intérieures */
-    .inner-header {
-      background: var(--sg);
-      color: var(--bg);
-      padding: 26px 0;
-      border-bottom: 3px solid var(--gold);
-    }
-    .inner-header .w {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-right: 130px;
-    }
-    .brand-link {
-      font: 600 1.45rem Fraunces, Georgia, serif;
-      color: var(--bg);
-      letter-spacing: 0.1em;
-      background: none;
-      border: 0;
-      padding: 0;
-      cursor: pointer;
-    }
-    .back-btn {
-      background: rgba(255,255,255,0.14);
-      color: var(--bg);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 6px;
-      padding: 0.45rem 0.9rem;
-      font: 600 0.9rem "Source Sans 3", sans-serif;
-      cursor: pointer;
-    }
+    #page-accueil.active { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; background: #1f261d; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
+    #page-accueil img { max-width: 100%; max-height: calc(100vh - 80px); width: auto; height: auto; object-fit: contain; display: block; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+    .cover-subtitle { margin: 14px 0 0; font: italic 1.2rem Fraunces, Georgia, serif; color: var(--gold); text-align: center; letter-spacing: 0.03em; }
+    .inner-header { background: var(--sg); color: var(--bg); padding: 26px 0; border-bottom: 3px solid var(--gold); }
+    .inner-header .w { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-right: 130px; }
+    .brand-link { font: 600 1.45rem Fraunces, Georgia, serif; color: var(--bg); letter-spacing: 0.1em; background: none; border: 0; padding: 0; cursor: pointer; }
+    .back-btn { background: rgba(255,255,255,0.14); color: var(--bg); border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 0.45rem 0.9rem; font: 600 0.9rem "Source Sans 3", sans-serif; cursor: pointer; }
     .back-btn:hover { background: rgba(255,255,255,0.25); }
-
-    /* Contenu des pages */
     .page-content { padding: 42px 0 54px; min-height: 62vh; }
     h1 { font-size: clamp(1.85rem, 4vw, 2.5rem); margin: 0 0 1.2rem; }
     h2 { font-size: 1.75rem; margin: 0 0 1.1rem; }
@@ -162,32 +42,10 @@
     ul, ol { padding-left: 1.3rem; }
     li { margin: 0.45rem 0; }
     li::marker { color: var(--sm); }
-    blockquote {
-      margin: 1.4rem 0;
-      padding: 0.3rem 0 0.3rem 1.2rem;
-      border-left: 4px solid var(--sm);
-      font: italic 1.25rem Fraunces, Georgia, serif;
-      color: var(--sm);
-    }
+    blockquote { margin: 1.4rem 0; padding: 0.3rem 0 0.3rem 1.2rem; border-left: 4px solid var(--sm); font: italic 1.25rem Fraunces, Georgia, serif; color: var(--sm); }
     .note { font-size: 0.93rem; font-style: italic; color: #5b6654; margin-top: 0.8rem; }
-
-    /* Bloc Présentation avec photo N&B */
-    .intro-grid {
-      display: grid;
-      grid-template-columns: 1fr 290px;
-      gap: 2rem;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-    .intro-photo {
-      width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(47, 58, 43, 0.14);
-      border: 1px solid var(--bd);
-      display: block;
-    }
-
-    /* Tableaux */
+    .intro-grid { display: grid; grid-template-columns: 1fr 290px; gap: 2rem; align-items: center; margin-bottom: 1.5rem; }
+    .intro-photo { width: 100%; border-radius: 14px; box-shadow: 0 8px 24px rgba(47, 58, 43, 0.14); border: 1px solid var(--bd); display: block; }
     table { width: 100%; border-collapse: collapse; background: #fff; margin: 1.1rem 0; font-size: 0.97rem; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     th { background: var(--sm); color: #fff; text-align: left; padding: 0.75rem 0.95rem; font-weight: 600; }
     td { padding: 0.8rem 0.95rem; border-bottom: 1px solid var(--bd); vertical-align: top; }
@@ -196,90 +54,23 @@
     td:last-child { width: 22%; }
     .price { display: block; font-weight: 700; color: var(--sg); font-size: 1.08rem; }
     td small { display: block; color: #6b7365; }
-
-    /* Encadrés Contacts & CGV */
-    .contact-card {
-      background: #fbf8f1;
-      border: 1px solid var(--bd);
-      border-radius: 12px;
-      padding: 1.4rem 1.6rem;
-      margin: 1.2rem 0;
-    }
-    .qualif-box {
-      background: var(--sl);
-      border-left: 4px solid var(--sg);
-      padding: 1rem 1.3rem;
-      border-radius: 0 8px 8px 0;
-      margin: 1.2rem 0;
-    }
-
-    /* Formulaire de réservation */
+    .contact-card { background: #fbf8f1; border: 1px solid var(--bd); border-radius: 12px; padding: 1.4rem 1.6rem; margin: 1.2rem 0; }
+    .qualif-box { background: var(--sl); border-left: 4px solid var(--sg); padding: 1rem 1.3rem; border-radius: 0 8px 8px 0; margin: 1.2rem 0; }
     fieldset { border: 1px solid var(--bd); border-radius: 10px; margin: 1.2rem 0; padding: 1rem 1.2rem 1.2rem; background: #fbf8f1; }
     legend { font: 600 1.08rem Fraunces, Georgia, serif; color: var(--sg); padding: 0 0.5rem; }
     .g { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.9rem 1.1rem; }
     label { display: block; font-weight: 600; font-size: 0.95rem; }
-    input[type=text], input[type=tel], input[type=email], input[type=date], select, textarea {
-      width: 100%;
-      padding: 0.65rem 0.75rem;
-      border: 1px solid #c9c2ae;
-      border-radius: 8px;
-      font: inherit;
-      margin-top: 0.25rem;
-      background: #fff;
-    }
+    input[type=text], input[type=tel], input[type=email], input[type=date], select, textarea { width: 100%; padding: 0.65rem 0.75rem; border: 1px solid #c9c2ae; border-radius: 8px; font: inherit; margin-top: 0.25rem; background: #fff; }
     textarea { min-height: 95px; resize: vertical; }
     label.c { font-weight: 400; display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.5rem 0; }
     label.c input { margin-top: 0.35rem; }
-    button.submit-btn {
-      background: var(--sg);
-      color: var(--bg);
-      border: 0;
-      border-radius: 8px;
-      padding: 0.95rem 1.8rem;
-      font: 600 1.05rem inherit;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
+    button.submit-btn { background: var(--sg); color: var(--bg); border: 0; border-radius: 8px; padding: 0.95rem 1.8rem; font: 600 1.05rem inherit; cursor: pointer; margin-top: 1rem; }
     button.submit-btn:hover { background: #3f4f35; }
-
-    /* Pied de page parfaitement centré avec chouette */
-    footer {
-      padding: 42px 20px 52px;
-      text-align: center;
-      font-size: 0.94rem;
-      color: #5b6654;
-      background: #efe7d6;
-      border-top: 1px solid var(--bd);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    footer p {
-      margin: 0.35rem auto;
-      text-align: center;
-      max-width: 680px;
-    }
-    .owl-emblem {
-      width: 135px;
-      height: auto;
-      margin: 0 auto 1rem;
-      display: block;
-    }
-    .footer-tagline {
-      font-family: Fraunces, Georgia, serif;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--sg);
-      font-size: 1.05rem;
-      margin-bottom: 0.2rem;
-    }
-    .footer-sub {
-      font: italic 1.05rem Fraunces, Georgia, serif;
-      color: var(--sm);
-      margin-bottom: 0.7rem;
-    }
-
+    footer { padding: 42px 20px 52px; text-align: center; font-size: 0.94rem; color: #5b6654; background: #efe7d6; border-top: 1px solid var(--bd); display: none; flex-direction: column; align-items: center; justify-content: center; }
+    footer p { margin: 0.35rem auto; text-align: center; max-width: 680px; }
+    .owl-emblem { width: 135px; height: auto; margin: 0 auto 1rem; display: block; }
+    .footer-tagline { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: 0.14em; color: var(--sg); font-size: 1.05rem; margin-bottom: 0.2rem; }
+    .footer-sub { font: italic 1.05rem Fraunces, Georgia, serif; color: var(--sm); margin-bottom: 0.7rem; }
     @media (max-width: 760px) {
       .intro-grid { grid-template-columns: 1fr; }
       .intro-photo { max-width: 340px; margin: 0 auto; }
@@ -294,9 +85,30 @@
 </head>
 <body>
 
-  <!-- Bouton Menu déroulant unique en haut à droite -->
   <div class="menu-container" id="menuBox">
     <button type="button" class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
     <div class="dropdown-list" id="dropdownMenu">
       <button type="button" onclick="openPage('page-accueil')">Accueil</button>
       <button type="button" onclick="openPage('page-engagements')">Maison Faune et ses engagements</button>
+      <button type="button" onclick="openPage('page-visites')">Comment se passent les visites</button>
+      <button type="button" onclick="openPage('page-tarifs')">Visite à la carte</button>
+      <button type="button" onclick="openPage('page-forfaits')">Forfaits 7 jours (-10 %)</button>
+      <button type="button" onclick="openPage('page-equides')">Tarifs Équidés</button>
+      <button type="button" onclick="openPage('page-transport')">Transport &amp; Options</button>
+      <button type="button" onclick="openPage('page-cgv')">CGV &amp; Déplacements</button>
+      <button type="button" onclick="openPage('page-contacts')">Contacts</button>
+      <button type="button" class="highlight" onclick="openPage('page-reservation')">Réservation en ligne</button>
+    </div>
+  </div>
+
+  <section id="page-accueil" class="view-section active">
+    <img src="hero-sisteron.jpg" alt="Maison Faune - La Conciergerie pour vos protégés">
+    <p class="cover-subtitle">Garde exclusive à domicile, promenades &amp; transport privé</p>
+  </section>
+
+  <section id="page-engagements" class="view-section">
+    <header class="inner-header"><div class="w"><button type="button" class="brand-link" onclick="openPage('page-accueil')">MAISON FAUNE</button><button type="button" class="back-btn" onclick="openPage('page-accueil')">← Retour à l’accueil</button></div></header>
+    <main class="w page-content">
+      <h1>Partez serein. Votre compagnon reste chez lui, choyé comme un roi.</h1>
+      <div class="intro-grid">
+        <div>
