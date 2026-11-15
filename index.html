@@ -20,11 +20,11 @@
     summary.menu-toggle:hover { background: var(--sg); }
     .dropdown-list { display: none; position: absolute; right: 0; top: calc(100% + 8px); background: #fbf8f1; border: 1px solid var(--bd); border-radius: 10px; min-width: 265px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); padding: 0.4rem 0; overflow: hidden; }
     details[open] .dropdown-list { display: block; }
-    .dropdown-list button { display: block; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid #efe7d6; padding: 0.68rem 1.2rem; color: var(--ink); font: 600 0.96rem "Source Sans 3", sans-serif; cursor: pointer; }
-    .dropdown-list button:last-child { border-bottom: none; }
-    .dropdown-list button:hover { background: var(--sl); color: var(--sg); }
-    .dropdown-list button.highlight { background: var(--sg); color: var(--bg); }
-    .dropdown-list button.highlight:hover { background: #3f4f35; }
+    .dropdown-list a { display: block; width: 100%; text-align: left; text-decoration: none; border-bottom: 1px solid #efe7d6; padding: 0.68rem 1.2rem; color: var(--ink); font: 600 0.96rem "Source Sans 3", sans-serif; }
+    .dropdown-list a:last-child { border-bottom: none; }
+    .dropdown-list a:hover { background: var(--sl); color: var(--sg); }
+    .dropdown-list a.highlight { background: var(--sg); color: var(--bg); }
+    .dropdown-list a.highlight:hover { background: #3f4f35; }
     .view-section { display: none; }
     .view-section.active { display: block; }
     #page-accueil.active { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; background: #1f261d; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
@@ -88,16 +88,16 @@
   <details class="menu-container" id="menuBox">
     <summary class="menu-toggle">☰ Menu</summary>
     <div class="dropdown-list">
-      <button type="button" onclick="openPage('page-accueil')">Accueil</button>
-      <button type="button" onclick="openPage('page-engagements')">Maison Faune et ses engagements</button>
-      <button type="button" onclick="openPage('page-visites')">Comment se passent les visites</button>
-      <button type="button" onclick="openPage('page-tarifs')">Visite à la carte</button>
-      <button type="button" onclick="openPage('page-forfaits')">Forfaits 7 jours (-10 %)</button>
-      <button type="button" onclick="openPage('page-equides')">Tarifs Équidés</button>
-      <button type="button" onclick="openPage('page-transport')">Transport &amp; Options</button>
-      <button type="button" onclick="openPage('page-cgv')">CGV &amp; Déplacements</button>
-      <button type="button" onclick="openPage('page-contacts')">Contacts</button>
-      <button type="button" class="highlight" onclick="openPage('page-reservation')">Réservation en ligne</button>
+      <a href="#page-accueil" onclick="openPage('page-accueil')">Accueil</a>
+      <a href="#page-engagements" onclick="openPage('page-engagements')">Maison Faune et ses engagements</a>
+      <a href="#page-visites" onclick="openPage('page-visites')">Comment se passent les visites</a>
+      <a href="#page-tarifs" onclick="openPage('page-tarifs')">Visite à la carte</a>
+      <a href="#page-forfaits" onclick="openPage('page-forfaits')">Forfaits 7 jours (-10 %)</a>
+      <a href="#page-equides" onclick="openPage('page-equides')">Tarifs Équidés</a>
+      <a href="#page-transport" onclick="openPage('page-transport')">Transport &amp; Options</a>
+      <a href="#page-cgv" onclick="openPage('page-cgv')">CGV &amp; Déplacements</a>
+      <a href="#page-contacts" onclick="openPage('page-contacts')">Contacts</a>
+      <a href="#page-reservation" class="highlight" onclick="openPage('page-reservation')">Réservation en ligne</a>
     </div>
   </details>
 
@@ -356,6 +356,12 @@
       }
       window.scrollTo(0, 0);
     }
+    window.addEventListener('hashchange', function() {
+      var hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        openPage(hash);
+      }
+    });
     document.addEventListener('click', function(event) {
       var menuBox = document.getElementById('menuBox');
       if (menuBox && !menuBox.contains(event.target)) {
