@@ -13,8 +13,6 @@
     body { margin: 0; font: 18px/1.65 "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
     .w { max-width: 980px; margin: 0 auto; padding: 0 22px; }
     h1, h2, h3 { font-family: Fraunces, Georgia, serif; color: var(--sg); line-height: 1.25; font-weight: 600; }
-
-    /* Bouton Menu déroulant sans JavaScript */
     .menu-container { position: fixed; top: 18px; right: 20px; z-index: 9999; }
     summary.menu-toggle { list-style: none; background: rgba(47, 58, 43, 0.95); color: var(--bg); border: 1px solid var(--gold); border-radius: 8px; padding: 0.65rem 1.2rem; font: 600 1rem "Source Sans 3", sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.35); user-select: none; }
     summary.menu-toggle::-webkit-details-marker { display: none; }
@@ -23,8 +21,6 @@
     .dropdown-list a:last-child { border-bottom: none; }
     .dropdown-list a:hover { background: var(--sl); color: var(--sg); }
     .dropdown-list a.highlight { background: var(--sg); color: var(--bg); }
-
-    /* Navigation native par pages (:target) */
     .page-view { display: none; }
     .page-view:target { display: block; }
     body:not(:has(.page-view:target)) #accueil,
@@ -35,14 +31,10 @@
     }
     #accueil img { max-width: 100%; max-height: calc(100vh - 80px); width: auto; height: auto; object-fit: contain; display: block; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
     .cover-subtitle { margin: 14px 0 0; font: italic 1.2rem Fraunces, Georgia, serif; color: var(--gold); text-align: center; }
-
-    /* En-tête des pages intérieures */
     .inner-header { background: var(--sg); color: var(--bg); padding: 26px 0; border-bottom: 3px solid var(--gold); }
     .inner-header .w { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-right: 130px; }
     .brand-link { font: 600 1.45rem Fraunces, Georgia, serif; color: var(--bg); letter-spacing: 0.1em; text-decoration: none; }
     .back-btn { background: rgba(255,255,255,0.14); color: var(--bg); border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 0.45rem 0.9rem; font: 600 0.9rem "Source Sans 3", sans-serif; text-decoration: none; }
-
-    /* Contenu des pages */
     .page-content { padding: 42px 0 54px; min-height: 62vh; }
     h1 { font-size: clamp(1.85rem, 4vw, 2.5rem); margin: 0 0 1.2rem; }
     h2 { font-size: 1.75rem; margin: 0 0 1.1rem; }
@@ -67,21 +59,12 @@
     .qualif-box { background: var(--sl); border-left: 4px solid var(--sg); padding: 1rem 1.3rem; border-radius: 0 8px 8px 0; margin: 1.2rem 0; }
     fieldset { border: 1px solid var(--bd); border-radius: 10px; margin: 1.2rem 0; padding: 1rem 1.2rem 1.2rem; background: #fbf8f1; }
     legend { font: 600 1.08rem Fraunces, Georgia, serif; color: var(--sg); padding: 0 0.5rem; }
-    .g { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.9rem 1.1rem; }
-    label { display: block; font-weight: 600; font-size: 0.95rem; }
-    input[type=text], input[type=tel], input[type=email], input[type=date], select, textarea { width: 100%; padding: 0.65rem 0.75rem; border: 1px solid #c9c2ae; border-radius: 8px; font: inherit; margin-top: 0.25rem; background: #fff; }
-    textarea { min-height: 95px; resize: vertical; }
-    label.c { font-weight: 400; display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.5rem 0; }
-    label.c input { margin-top: 0.35rem; }
     .mail-btn { display: inline-block; background: var(--sg); color: var(--bg); text-decoration: none; border-radius: 8px; padding: 0.95rem 1.8rem; font: 600 1.05rem inherit; margin-top: 1rem; }
-
-    /* Pied de page dans chaque page */
     .page-footer { padding: 45px 20px 55px; text-align: center; font-size: 0.94rem; color: #5b6654; background: #efe7d6; border-top: 1px solid var(--bd); }
     .page-footer p { margin: 0.35rem auto; text-align: center; }
     .owl-emblem { width: 135px; height: auto; margin: 0 auto 1rem; display: block; }
     .footer-tagline { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: 0.14em; color: var(--sg); font-size: 1.05rem; }
     .footer-sub { font: italic 1.05rem Fraunces, Georgia, serif; color: var(--sm); margin-bottom: 0.8rem; }
-
     @media (max-width: 760px) {
       .intro-grid { grid-template-columns: 1fr; }
       .intro-photo { max-width: 340px; margin: 0 auto; }
