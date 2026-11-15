@@ -13,6 +13,8 @@
     body { margin: 0; font: 18px/1.65 "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
     .w { max-width: 980px; margin: 0 auto; padding: 0 22px; }
     h1, h2, h3 { font-family: Fraunces, Georgia, serif; color: var(--sg); line-height: 1.25; font-weight: 600; }
+
+    /* Bouton Menu déroulant */
     .menu-container { position: fixed; top: 18px; right: 20px; z-index: 9999; }
     summary.menu-toggle { list-style: none; background: rgba(47, 58, 43, 0.95); color: var(--bg); border: 1px solid var(--gold); border-radius: 8px; padding: 0.65rem 1.2rem; font: 600 1rem "Source Sans 3", sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.35); user-select: none; }
     summary.menu-toggle::-webkit-details-marker { display: none; }
@@ -21,6 +23,8 @@
     .dropdown-list a:last-child { border-bottom: none; }
     .dropdown-list a:hover { background: var(--sl); color: var(--sg); }
     .dropdown-list a.highlight { background: var(--sg); color: var(--bg); }
+
+    /* Navigation par pages séparées (:target) */
     .page-view { display: none; }
     .page-view:target { display: block; }
     body:not(:has(.page-view:target)) #accueil,
@@ -31,12 +35,23 @@
     }
     #accueil img { max-width: 100%; max-height: calc(100vh - 80px); width: auto; height: auto; object-fit: contain; display: block; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
     .cover-subtitle { margin: 14px 0 0; font: italic 1.2rem Fraunces, Georgia, serif; color: var(--gold); text-align: center; }
-    .inner-header { background: var(--sg); color: var(--bg); padding: 26px 0; border-bottom: 3px solid var(--gold); }
+
+    /* En-tête des pages intérieures */
+    .inner-header { background: var(--sg); color: var(--bg); padding: 24px 0; border-bottom: 3px solid var(--gold); }
     .inner-header .w { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-right: 130px; }
     .brand-link { font: 600 1.45rem Fraunces, Georgia, serif; color: var(--bg); letter-spacing: 0.1em; text-decoration: none; }
     .back-btn { background: rgba(255,255,255,0.14); color: var(--bg); border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 0.45rem 0.9rem; font: 600 0.9rem "Source Sans 3", sans-serif; text-decoration: none; }
+
+    /* En-tête centré avec la maison en noir et blanc (Page 2) */
+    .house-showcase { text-align: center; margin: 0 auto 2.2rem; }
+    .house-title { font-family: Fraunces, Georgia, serif; font-size: clamp(2rem, 4.5vw, 2.8rem); letter-spacing: 0.14em; color: var(--sg); margin: 0 0 0.35rem; font-weight: 600; }
+    .house-tagline { font: italic 1.25rem Fraunces, Georgia, serif; color: var(--sm); margin: 0 0 0.25rem; }
+    .house-sub { font-size: 0.98rem; color: #5b6654; margin: 0 0 1.4rem; }
+    .house-photo-center { width: 100%; max-width: 440px; height: auto; margin: 0 auto; display: block; border-radius: 16px; box-shadow: 0 10px 28px rgba(47, 58, 43, 0.16); border: 1px solid var(--bd); }
+
+    /* Contenu des pages */
     .page-content { padding: 42px 0 54px; min-height: 62vh; }
-    h1 { font-size: clamp(1.85rem, 4vw, 2.5rem); margin: 0 0 1.2rem; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0 0 1.2rem; }
     h2 { font-size: 1.75rem; margin: 0 0 1.1rem; }
     h3 { font-size: 1.22rem; color: var(--sm); margin: 1.6rem 0 0.5rem; }
     p, li { max-width: 48em; }
@@ -45,8 +60,6 @@
     li::marker { color: var(--sm); }
     blockquote { margin: 1.4rem 0; padding: 0.3rem 0 0.3rem 1.2rem; border-left: 4px solid var(--sm); font: italic 1.25rem Fraunces, Georgia, serif; color: var(--sm); }
     .note { font-size: 0.93rem; font-style: italic; color: #5b6654; margin-top: 0.8rem; }
-    .intro-grid { display: grid; grid-template-columns: 1fr 290px; gap: 2rem; align-items: center; margin-bottom: 1.5rem; }
-    .intro-photo { width: 100%; border-radius: 14px; box-shadow: 0 8px 24px rgba(47, 58, 43, 0.14); border: 1px solid var(--bd); }
     table { width: 100%; border-collapse: collapse; background: #fff; margin: 1.1rem 0; font-size: 0.97rem; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     th { background: var(--sm); color: #fff; text-align: left; padding: 0.75rem 0.95rem; font-weight: 600; }
     td { padding: 0.8rem 0.95rem; border-bottom: 1px solid var(--bd); vertical-align: top; }
@@ -66,8 +79,6 @@
     .footer-tagline { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: 0.14em; color: var(--sg); font-size: 1.05rem; }
     .footer-sub { font: italic 1.05rem Fraunces, Georgia, serif; color: var(--sm); margin-bottom: 0.8rem; }
     @media (max-width: 760px) {
-      .intro-grid { grid-template-columns: 1fr; }
-      .intro-photo { max-width: 340px; margin: 0 auto; }
       thead { display: none; }
       tr { display: block; border: 1px solid var(--bd); margin: 0.7rem 0; background: #fff; }
       td { display: block; width: auto !important; border: 0; padding: 0.4rem 0.9rem; }
@@ -100,14 +111,17 @@
   <section id="engagements" class="page-view">
     <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
-      <h1>Partez serein. Votre compagnon reste chez lui, choyé comme un roi.</h1>
-      <div class="intro-grid">
-        <div>
-          <p>Fini le chenil, la cage et la boule au ventre. Avec <strong>Maison Faune</strong>, je suis votre unique interlocuteur. Je viens chez vous une à deux fois par jour et, pour les forfaits, je vous envoie chaque jour une courte vidéo de votre compagnon, directement sur votre téléphone.</p>
-          <p>Maison Faune est une conciergerie dédiée à offrir des services exceptionnels pour vos animaux de compagnie sur <strong>Sisteron et sa région</strong>. Que vous ayez besoin de promenades quotidiennes, de soins attentionnés ou de visites régulières, je traite vos protégés comme des membres de la famille.</p>
-        </div>
-        <div><img src="maison-noir-blanc.jpg" alt="Maison Faune" class="intro-photo"></div>
+      <div class="house-showcase">
+        <p class="house-title">MAISON FAUNE</p>
+        <p class="house-tagline">La Conciergerie de vos Protégés</p>
+        <p class="house-sub">Garde exclusive à domicile, promenades &amp; transport privé</p>
+        <img src="maison-noir-blanc.jpg" alt="Maison Faune - La Conciergerie de vos Protégés" class="house-photo-center">
       </div>
+
+      <h1>Partez serein. Votre compagnon reste chez lui, choyé comme un roi.</h1>
+      <p>Fini le chenil, la cage et la boule au ventre. Avec <strong>Maison Faune</strong>, je suis votre unique interlocuteur. Je viens chez vous une à deux fois par jour et, pour les forfaits, je vous envoie chaque jour une courte vidéo de votre compagnon, directement sur votre téléphone.</p>
+      <p>Maison Faune est une conciergerie dédiée à offrir des services exceptionnels pour vos animaux de compagnie sur <strong>Sisteron et sa région</strong>. Que vous ayez besoin de promenades quotidiennes, de soins attentionnés ou de visites régulières, je traite vos protégés comme des membres de la famille.</p>
+
       <h2>Maison Faune et ses engagements</h2>
       <h3>Le départ en vacances ne devrait pas se vivre la gorge serrée</h3>
       <p>La valise est prête. Lui, il vous regarde. Il sait. Et vous cherchez déjà une solution : le chenil (bruit, box, stress), le voisin qui « passera si possible », la famille qui commence à se lasser.</p>
@@ -182,8 +196,6 @@
         </tbody>
       </table>
       <p class="note">10 % de remise sur les forfaits de 7 jours. Aucune majoration les dimanches et jours fériés pour les forfaits. Les forfaits Présence et Sérénité sont calculés sur la base d’un animal par foyer. Suppléments : +10 €/jour par chien supplémentaire ; +5 €/jour par chat ou NAC supplémentaire.</p>
-      <p><strong>Votre Journal de Bord souvenir.</strong> À l’issue de chaque forfait, un compte rendu détaillé retrace le déroulement du séjour, les habitudes observées, les moments de complicité et le suivi bien-être de vos protégés.</p>
-    </main>
   <section id="equides" class="page-view">
     <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
