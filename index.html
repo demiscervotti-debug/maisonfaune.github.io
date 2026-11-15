@@ -14,7 +14,7 @@
     .w { max-width: 980px; margin: 0 auto; padding: 0 22px; }
     h1, h2, h3 { font-family: Fraunces, Georgia, serif; color: var(--sg); line-height: 1.25; font-weight: 600; }
 
-    /* Bouton Menu déroulant */
+    /* Bouton Menu déroulant sans JavaScript */
     .menu-container { position: fixed; top: 18px; right: 20px; z-index: 9999; }
     summary.menu-toggle { list-style: none; background: rgba(47, 58, 43, 0.95); color: var(--bg); border: 1px solid var(--gold); border-radius: 8px; padding: 0.65rem 1.2rem; font: 600 1rem "Source Sans 3", sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.35); user-select: none; }
     summary.menu-toggle::-webkit-details-marker { display: none; }
@@ -24,12 +24,15 @@
     .dropdown-list a:hover { background: var(--sl); color: var(--sg); }
     .dropdown-list a.highlight { background: var(--sg); color: var(--bg); }
 
-    /* Gestion des pages séparées */
+    /* Navigation native par pages (:target) */
     .page-view { display: none; }
-    .page-view.active { display: block; }
-
-    /* Page de garde 100% verrouillée sans défilement */
-    #accueil.active { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; background: #1f261d; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
+    .page-view:target { display: block; }
+    body:not(:has(.page-view:target)) #accueil,
+    #accueil:target {
+      position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden;
+      background: #1f261d; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 16px;
+    }
     #accueil img { max-width: 100%; max-height: calc(100vh - 80px); width: auto; height: auto; object-fit: contain; display: block; border-radius: 4px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
     .cover-subtitle { margin: 14px 0 0; font: italic 1.2rem Fraunces, Georgia, serif; color: var(--gold); text-align: center; }
 
@@ -70,12 +73,15 @@
     textarea { min-height: 95px; resize: vertical; }
     label.c { font-weight: 400; display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.5rem 0; }
     label.c input { margin-top: 0.35rem; }
-    button.submit-btn { background: var(--sg); color: var(--bg); border: 0; border-radius: 8px; padding: 0.95rem 1.8rem; font: 600 1.05rem inherit; cursor: pointer; margin-top: 1rem; }
-    footer { padding: 45px 20px 55px; text-align: center; font-size: 0.94rem; color: #5b6654; background: #efe7d6; border-top: 1px solid var(--bd); display: none; }
-    footer p { margin: 0.35rem auto; text-align: center; }
+    .mail-btn { display: inline-block; background: var(--sg); color: var(--bg); text-decoration: none; border-radius: 8px; padding: 0.95rem 1.8rem; font: 600 1.05rem inherit; margin-top: 1rem; }
+
+    /* Pied de page dans chaque page */
+    .page-footer { padding: 45px 20px 55px; text-align: center; font-size: 0.94rem; color: #5b6654; background: #efe7d6; border-top: 1px solid var(--bd); }
+    .page-footer p { margin: 0.35rem auto; text-align: center; }
     .owl-emblem { width: 135px; height: auto; margin: 0 auto 1rem; display: block; }
     .footer-tagline { font-family: Fraunces, Georgia, serif; font-weight: 600; letter-spacing: 0.14em; color: var(--sg); font-size: 1.05rem; }
     .footer-sub { font: italic 1.05rem Fraunces, Georgia, serif; color: var(--sm); margin-bottom: 0.8rem; }
+
     @media (max-width: 760px) {
       .intro-grid { grid-template-columns: 1fr; }
       .intro-photo { max-width: 340px; margin: 0 auto; }
@@ -90,26 +96,26 @@
 
   <details class="menu-container" id="menuBox">
     <summary class="menu-toggle">☰ Menu</summary>
-    <div class="dropdown-list">
-      <a href="#accueil" onclick="showPage('accueil')">Accueil</a>
-      <a href="#engagements" onclick="showPage('engagements')">Maison Faune et ses engagements</a>
-      <a href="#visites" onclick="showPage('visites')">Comment se passent les visites</a>
-      <a href="#tarifs" onclick="showPage('tarifs')">Visite à la carte</a>
-      <a href="#forfaits" onclick="showPage('forfaits')">Forfaits 7 jours (-10 %)</a>
-      <a href="#equides" onclick="showPage('equides')">Tarifs Équidés</a>
-      <a href="#transport" onclick="showPage('transport')">Transport &amp; Options</a>
-      <a href="#cgv" onclick="showPage('cgv')">CGV &amp; Déplacements</a>
-      <a href="#contacts" onclick="showPage('contacts')">Contacts</a>
-      <a href="#reservation" class="highlight" onclick="showPage('reservation')">Réservation en ligne</a>
-    </div>
+    <nav class="dropdown-list">
+      <a href="#accueil">Accueil</a>
+      <a href="#engagements">Maison Faune et ses engagements</a>
+      <a href="#visites">Comment se passent les visites</a>
+      <a href="#tarifs">Visite à la carte</a>
+      <a href="#forfaits">Forfaits 7 jours (-10 %)</a>
+      <a href="#equides">Tarifs Équidés</a>
+      <a href="#transport">Transport &amp; Options</a>
+      <a href="#cgv">CGV &amp; Déplacements</a>
+      <a href="#contacts">Contacts</a>
+      <a href="#reservation" class="highlight">Réservation en ligne</a>
+    </nav>
   </details>
 
-  <section id="accueil" class="page-view active">
+  <section id="accueil" class="page-view">
     <img src="hero-sisteron.jpg" alt="Maison Faune - La Conciergerie pour vos protégés">
     <p class="cover-subtitle">Garde exclusive à domicile, promenades &amp; transport privé</p>
   </section>
   <section id="engagements" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h1>Partez serein. Votre compagnon reste chez lui, choyé comme un roi.</h1>
       <div class="intro-grid">
@@ -137,10 +143,11 @@
         <li><strong>Une exigence de terrain.</strong> Trente ans de protocoles, de ponctualité et de zéro improvisation, pour le bien-être de votre compagnon.</li>
       </ul>
     </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
   </section>
 
   <section id="visites" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Comment se passent les visites ?</h2>
       <h3>Une visite, concrètement</h3>
@@ -158,10 +165,11 @@
         </tbody>
       </table>
     </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
   </section>
 
   <section id="tarifs" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Animaux de compagnie</h2>
       <h3>Visite à la carte</h3>
@@ -175,10 +183,11 @@
       </table>
       <p class="note"><strong>Dimanches et jours fériés :</strong> Prestations à la carte majorées de +10 € par intervention.</p>
     </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
   </section>
 
   <section id="forfaits" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Forfaits de 7 jours et plus – 10 % de remise</h2>
       <table>
@@ -192,9 +201,8 @@
       <p class="note">10 % de remise sur les forfaits de 7 jours. Aucune majoration les dimanches et jours fériés pour les forfaits. Les forfaits Présence et Sérénité sont calculés sur la base d’un animal par foyer. Suppléments : +10 €/jour par chien supplémentaire ; +5 €/jour par chat ou NAC supplémentaire.</p>
       <p><strong>Votre Journal de Bord souvenir.</strong> À l’issue de chaque forfait, un compte rendu détaillé retrace le déroulement du séjour, les habitudes observées, les moments de complicité et le suivi bien-être de vos protégés.</p>
     </main>
-  </section>
   <section id="equides" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Équidés et forfaits combinés</h2>
       <table>
@@ -217,10 +225,11 @@
       </ul>
       <p class="note"><strong>Dimanches et jours fériés :</strong> Prestations à la carte majorées de +10 € par intervention (aucune majoration pour les forfaits).</p>
     </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
   </section>
 
   <section id="transport" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Transport, accompagnement et options</h2>
       <table>
@@ -235,10 +244,10 @@
       </table>
       <p class="note"><strong>Dimanches et jours fériés :</strong> +25 % pour les transports et temps d’attente. Une demande particulière ? Une prestation personnalisée peut être étudiée sur devis.</p>
     </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
   </section>
-
   <section id="cgv" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Conditions générales, déplacements et mentions légales</h2>
       <h3>Précisions commerciales (CGV)</h3>
@@ -271,10 +280,11 @@
         </ul>
       </div>
     </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
   </section>
 
   <section id="contacts" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Contacts et informations légales</h2>
       <div class="contact-card">
@@ -286,10 +296,27 @@
         <p class="note">TVA non applicable, art. 293 B du CGI · Médiateur de la consommation et Conditions Générales de Vente complètes remis en annexe de chaque devis.</p>
       </div>
     </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
   </section>
 
   <section id="reservation" class="page-view">
-    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link" onclick="showPage('accueil')">MAISON FAUNE</a><a href="#accueil" class="back-btn" onclick="showPage('accueil')">← Retour à l’accueil</a></div></header>
+    <header class="inner-header"><div class="w"><a href="#accueil" class="brand-link">MAISON FAUNE</a><a href="#accueil" class="back-btn">← Retour à l’accueil</a></div></header>
     <main class="w page-content">
       <h2>Demande de réservation en ligne</h2>
-      <p>Remplissez ce formulaire sans engagement (aucun paiement requis). Votre demande préparera automatiquement votre message à destination de <strong>info@maisonfaune.fr</strong> et je vous recontacterai sous 24 h.</p>
+      <p>Remplissez ce formulaire sans engagement (aucun paiement requis). Cliquez sur le bouton ci-dessous pour préparer automatiquement votre demande par e-mail à destination de <strong>info@maisonfaune.fr</strong> (ou appelez-moi directement au <strong>07 56 80 29 18</strong>).</p>
+      <fieldset>
+        <legend>Préparer ma demande de réservation</legend>
+        <p>Pour une réponse sous 24 h, merci d’indiquer dans votre message :</p>
+        <ul>
+          <li>Vos <strong>nom, prénom, téléphone</strong> et <strong>commune</strong></li>
+          <li>La <strong>formule souhaitée</strong> (Présence, Grand Air, Forfait 7 jours, Équidés, Transport...)</li>
+          <li>Vos <strong>animaux</strong> et les <strong>dates envisagées</strong> (ainsi que l’option <em>Maison Veillée</em> si souhaitée)</li>
+        </ul>
+        <a href="mailto:info@maisonfaune.fr?subject=Demande%20de%20r%C3%A9servation%20Maison%20Faune&body=Bonjour%2C%0A%0AJe%20souhaite%20effectuer%20une%20demande%20de%20r%C3%A9servation%20%3A%0A-%20Nom%20et%20pr%C3%A9nom%20%3A%20%0A-%20T%C3%A9l%C3%A9phone%20%3A%20%0A-%20Commune%20%3A%20%0A-%20Prestation%20souhait%C3%A9e%20%3A%20%0A-%20Animaux%20%3A%20%0A-%20Dates%20du%20s%C3%A9jour%20%3A%20%0A%0ACordialement." class="mail-btn">Envoyer ma demande par e-mail à info@maisonfaune.fr</a>
+      </fieldset>
+    </main>
+    <footer class="page-footer"><img src="chouette.png" alt="Maison Faune" class="owl-emblem"><p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p><p class="footer-sub">Garde exclusive à domicile, promenades &amp; transport privé</p><p><strong>MAISON FAUNE</strong> · Sisteron et sa région · 07 56 80 29 18 · info@maisonfaune.fr</p></footer>
+  </section>
+
+</body>
+</html>
