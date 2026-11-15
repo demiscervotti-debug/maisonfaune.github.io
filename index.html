@@ -3,11 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Maison Faune – La Conciergerie de vos Protégés · Sisteron et alentours</title>
+  <title>Maison Faune – La Conciergerie pour vos Protégés · Sisteron et alentours</title>
   <meta name="description" content="Garde exclusive à domicile, promenades et transport privé d’animaux autour de Sisteron : visites, forfaits 7 jours, équidés. Une courte vidéo chaque jour pour les forfaits.">
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --sg: #4f6142;
@@ -22,121 +19,82 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font: 18px/1.65 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font: 18px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Georgia, serif;
       color: var(--ink);
       background: var(--bg);
     }
     .w { max-width: 980px; margin: 0 auto; padding: 0 22px; }
-    h1, h2, h3 { font-family: Fraunces, Georgia, serif; color: var(--sg); line-height: 1.25; font-weight: 600; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; color: var(--sg); line-height: 1.25; font-weight: 600; }
 
-    /* Barre de navigation principale */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(47, 58, 43, 0.96);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(255,255,255,0.12);
+    /* Bouton Menu déroulant flottant (sans bandeau) */
+    .menu-container {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      z-index: 1000;
     }
-    .navbar .w {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.7rem;
-      padding-bottom: 0.7rem;
-      gap: 0.8rem;
-    }
-    .nav-logo {
-      font: 600 1.25rem Fraunces, Georgia, serif;
+    .menu-toggle {
+      background: rgba(47, 58, 43, 0.94);
       color: var(--bg);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-    }
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    .nav-btn {
-      display: inline-block;
-      padding: 0.45rem 0.95rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--bg);
-      border: 1px solid rgba(227, 234, 219, 0.35);
-      transition: all 0.2s ease;
-    }
-    .nav-btn:hover { background: var(--sm); border-color: var(--sm); }
-    .nav-btn.cta {
-      background: var(--gold);
-      color: var(--ink);
-      border-color: var(--gold);
-    }
-    .nav-btn.cta:hover { background: #e6d4b0; }
-
-    /* Page de garde avec photo Sisteron */
-    .hero-cover {
-      position: relative;
-      min-height: 82vh;
-      display: flex;
-      align-items: flex-end;
-      background: linear-gradient(to bottom, rgba(30, 38, 28, 0.25) 0%, rgba(30, 38, 28, 0.75) 100%),
-                  url('hero-sisteron.jpg') center/cover no-repeat;
-      background-color: var(--sg);
-      color: var(--bg);
-      padding: 60px 0;
-    }
-    .hero-content { max-width: 780px; }
-    .hero-kicker {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.95rem;
-      color: var(--gold);
-      font-weight: 600;
-      margin: 0 0 0.5rem;
-    }
-    .hero-cover h1 {
-      color: #fff;
-      font-size: clamp(2.1rem, 5vw, 3.3rem);
-      margin: 0 0 1rem;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.45);
-    }
-    .hero-sub {
-      font-size: 1.15rem;
-      color: #f3ede0;
-      margin: 0 0 1.8rem;
-      max-width: 42em;
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-    .hero-actions a {
-      padding: 0.8rem 1.4rem;
+      border: 1px solid var(--gold);
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
+      padding: 0.65rem 1.2rem;
+      font: 600 1rem system-ui, -apple-system, sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      margin: 0;
     }
-    .btn-primary { background: var(--gold); color: var(--ink); }
-    .btn-primary:hover { background: #e8d8b7; }
-    .btn-secondary { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.5); }
-    .btn-secondary:hover { background: rgba(255,255,255,0.28); }
+    .menu-toggle:hover { background: var(--sg); }
+    .dropdown-list {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      background: #fbf8f1;
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      min-width: 260px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      padding: 0.4rem 0;
+      overflow: hidden;
+    }
+    .dropdown-list.open { display: block; }
+    .dropdown-list a {
+      display: block;
+      padding: 0.65rem 1.2rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.96rem;
+      font-weight: 600;
+      border-bottom: 1px solid #efe7d6;
+    }
+    .dropdown-list a:last-child { border-bottom: none; }
+    .dropdown-list a:hover { background: var(--sl); color: var(--sg); }
+    .dropdown-list a.highlight { background: var(--sg); color: var(--bg); }
+    .dropdown-list a.highlight:hover { background: #3f4f35; }
 
-    /* Sous-menu rapide des sections */
-    .toc { background: var(--sl); border-bottom: 1px solid var(--bd); }
-    .toc .w { display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; padding-top: 0.75rem; padding-bottom: 0.75rem; }
-    .toc a { color: var(--sg); text-decoration: none; font-size: 0.92rem; font-weight: 600; }
-    .toc a:hover { text-decoration: underline; }
+    /* Page de garde 100% nette avec la photo seule */
+    .hero-clean {
+      width: 100%;
+      background: #2f3a2b;
+      line-height: 0;
+    }
+    .hero-clean img {
+      width: 100%;
+      max-height: 88vh;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
 
     /* Sections et mise en page */
-    section { padding: 48px 0; border-bottom: 1px solid var(--bd); }
-    h2 { font-size: 1.8rem; margin: 0 0 1.1rem; }
-    h3 { font-size: 1.25rem; color: var(--sm); margin: 1.6rem 0 0.5rem; }
+    section { padding: 46px 0; border-bottom: 1px solid var(--bd); }
+    h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 1rem; }
+    h2 { font-size: 1.75rem; margin: 0 0 1.1rem; }
+    h3 { font-size: 1.22rem; color: var(--sm); margin: 1.6rem 0 0.5rem; }
     p, li { max-width: 48em; }
     ul, ol { padding-left: 1.3rem; }
     li { margin: 0.45rem 0; }
@@ -145,7 +103,7 @@
       margin: 1.4rem 0;
       padding: 0.3rem 0 0.3rem 1.2rem;
       border-left: 4px solid var(--sm);
-      font: italic 1.25rem Fraunces, Georgia, serif;
+      font: italic 1.25rem Georgia, serif;
       color: var(--sm);
     }
     .note { font-size: 0.93rem; font-style: italic; color: #5b6654; margin-top: 0.6rem; }
@@ -153,7 +111,7 @@
     /* Bloc Présentation avec photo N&B */
     .intro-grid {
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 1fr 290px;
       gap: 2rem;
       align-items: center;
       margin-bottom: 1.5rem;
@@ -194,7 +152,7 @@
 
     /* Formulaire de réservation */
     fieldset { border: 1px solid var(--bd); border-radius: 10px; margin: 1.2rem 0; padding: 1rem 1.2rem 1.2rem; background: #fbf8f1; }
-    legend { font: 600 1.08rem Fraunces, Georgia, serif; color: var(--sg); padding: 0 0.5rem; }
+    legend { font: 600 1.08rem Georgia, serif; color: var(--sg); padding: 0 0.5rem; }
     .g { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.9rem 1.1rem; }
     label { display: block; font-weight: 600; font-size: 0.95rem; }
     input[type=text], input[type=tel], input[type=email], input[type=date], select, textarea {
@@ -209,7 +167,7 @@
     textarea { min-height: 95px; resize: vertical; }
     label.c { font-weight: 400; display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.5rem 0; }
     label.c input { margin-top: 0.35rem; }
-    button {
+    button.submit-btn {
       background: var(--sg);
       color: var(--bg);
       border: 0;
@@ -219,21 +177,30 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-    button:hover { background: #3f4f35; }
+    button.submit-btn:hover { background: #3f4f35; }
 
     /* Pied de page avec chouette */
     footer {
-      padding: 40px 0 50px;
+      padding: 45px 0 55px;
       text-align: center;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       color: #5b6654;
       background: #efe7d6;
     }
     .owl-emblem {
-      width: 140px;
+      width: 145px;
       height: auto;
       margin: 0 auto 1rem;
       display: block;
+    }
+    .footer-tagline {
+      font-family: Georgia, serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sg);
+      font-weight: 600;
+      margin: 0.4rem 0 0.8rem;
     }
 
     @media (max-width: 760px) {
@@ -249,35 +216,390 @@
 </head>
 <body>
 
-  <!-- Menu supérieur permanent -->
-  <nav class="navbar" aria-label="Menu principal">
-    <div class="w">
-      <a href="#accueil" class="nav-logo">MAISON FAUNE</a>
-      <div class="nav-links">
-        <a href="#tarifs" class="nav-btn">Tarifs</a>
-        <a href="#reservation" class="nav-btn cta">Réservation en ligne</a>
-        <a href="#contacts" class="nav-btn">Contacts</a>
-        <a href="#cgv" class="nav-btn">CGV</a>
-      </div>
+  <!-- Petit bouton Menu déroulant unique -->
+  <div class="menu-container" id="menuBox">
+    <button type="button" class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <div class="dropdown-list" id="dropdownMenu">
+      <a href="#engagements" onclick="closeMenu()">Maison Faune &amp; Engagements</a>
+      <a href="#visites" onclick="closeMenu()">Comment se passent les visites</a>
+      <a href="#tarifs" onclick="closeMenu()">Tarifs animaux de compagnie</a>
+      <a href="#forfaits" onclick="closeMenu()">Forfaits 7 jours (-10 %)</a>
+      <a href="#equides" onclick="closeMenu()">Tarifs Équidés</a>
+      <a href="#transport" onclick="closeMenu()">Transport &amp; Options</a>
+      <a href="#cgv" onclick="closeMenu()">CGV &amp; Déplacements</a>
+      <a href="#contacts" onclick="closeMenu()">Contacts</a>
+      <a href="#reservation" class="highlight" onclick="closeMenu()">Réservation en ligne</a>
     </div>
-  </nav>
+  </div>
 
-  <!-- Page de garde avec la photo de Sisteron -->
-  <header id="accueil" class="hero-cover">
-    <div class="w">
-      <div class="hero-content">
-        <p class="hero-kicker">Sisteron et alentours · Garde exclusive à domicile, promenades &amp; transport privé</p>
-        <h1>Partez serein. Votre compagnon reste chez lui, choyé comme un roi.</h1>
-        <p class="hero-sub">Fini le chenil, la cage et la boule au ventre. Avec Maison Faune, je suis votre unique interlocuteur. Je viens chez vous une à deux fois par jour et, pour les forfaits, je vous envoie chaque jour une courte vidéo de votre compagnon.</p>
-        <div class="hero-actions">
-          <a href="#tarifs" class="btn-primary">Découvrir les tarifs</a>
-          <a href="#reservation" class="btn-secondary">Demander une réservation</a>
-          <a href="#contacts" class="btn-secondary">Me contacter</a>
-        </div>
-      </div>
-    </div>
+  <!-- Page de garde 100% nette avec la photo seule -->
+  <header id="accueil" class="hero-clean">
+    <img src="hero-sisteron.jpg" alt="Maison Faune - La Conciergerie pour vos protégés à Sisteron">
   </header>
 
-  <!-- Sommaire détaillé -->
-  <div class="toc" aria-label="Sommaire des rubriques">
+  <main class="w">
+    <section id="engagements">
+      <h1>Partez serein. Votre compagnon reste chez lui, choyé comme un roi.</h1>
+      <div class="intro-grid">
+        <div>
+          <p>Fini le chenil, la cage et la boule au ventre. Avec <strong>Maison Faune</strong>, je suis votre unique interlocuteur. Je viens chez vous une à deux fois par jour et, pour les forfaits, je vous envoie chaque jour une courte vidéo de votre compagnon, directement sur votre téléphone.</p>
+          <p>Maison Faune est une conciergerie dédiée à offrir des services exceptionnels pour vos animaux de compagnie autour de <strong>Sisteron</strong>. Que vous ayez besoin de promenades quotidiennes, de soins attentionnés ou de visites régulières, je traite vos protégés comme des membres de la famille.</p>
+        </div>
+        <div>
+          <img src="maison-noir-blanc.jpg" alt="Maison Faune - Garde exclusive à domicile" class="intro-photo">
+        </div>
+      </div>
+
+      <h2>1. Maison Faune et ses engagements</h2>
+      <h3>Le départ en vacances ne devrait pas se vivre la gorge serrée</h3>
+      <p>La valise est prête. Lui, il vous regarde. Il sait. Et vous cherchez déjà une solution : le chenil (bruit, box, stress), le voisin qui « passera si possible », la famille qui commence à se lasser.</p>
+      <p><strong>Votre animal n’est pas un colis.</strong> Il a ses rituels, son canapé, son odeur, ses horaires. La plus grande inquiétude pour lui, c’est le changement. Alors je viens à lui, pour ne pas modifier ses habitudes.</p>
+
+      <h3>Pourquoi une conciergerie pour vos protégés ?</h3>
+      <p>Parce que je m’occupe de tout ce dont votre compagnon a besoin quand vous n’êtes pas là : la garde, la promenade, le transport, les courses. Du chat au furet, du chien à la tortue, et pour vos équidés, chacun d’entre eux mérite un service sur mesure.</p>
+      <blockquote>« Ils gardent leurs repères, et vous retrouvez votre liberté d’esprit. »</blockquote>
+
+      <h3>Une présence attentive, dans le respect de ses habitudes</h3>
+      <ul>
+        <li><strong>Chez lui, avec ses habitudes.</strong> Avec sa gamelle, son panier, ses horaires et, surtout, une présence attentive et affectueuse.</li>
+        <li><strong>Des nouvelles chaque jour.</strong> Pour les forfaits 7 jours, une courte vidéo vous est envoyée quotidiennement, par WhatsApp ou SMS selon votre choix : vous le voyez manger, jouer, ronronner ou pâturer.</li>
+        <li><strong>Un seul visage.</strong> Le même intervenant vous accompagne du début à la fin. Pas de rotation, pas d’inconnu.</li>
+        <li><strong>Qualifications officielles.</strong> Titulaire de l’ACACED (chiens, chats et autres animaux de compagnie d’espèces domestiques) et du certificat de compétence pour le transport d’animaux vivants (TAV). Cela ne remplace pas un vétérinaire : au moindre doute, votre vétérinaire est contacté.</li>
+        <li><strong>Votre maison n’est pas oubliée.</strong> L’option <em>Maison Veillée</em> comprend le courrier, l’arrosage des plantes, la gestion des volets et un contrôle visuel simple. Il ne s’agit ni de gardiennage ni d’une garantie anti-cambriolage.</li>
+        <li><strong>Joignable 7j/7.</strong> Chaque jour, de 8 h à 20 h, je réponds à vos messages et partage les nouvelles de vos compagnons. Pendant votre séjour, une ligne directe reste accessible à tout moment en cas d’urgence ou d’imprévu sur votre trajet de retour.</li>
+        <li><strong>Une exigence de terrain.</strong> Trente ans de protocoles, de ponctualité et de zéro improvisation, pour le bien-être de votre compagnon.</li>
+      </ul>
+    </section>
+
+    <section id="visites">
+      <h2>2. Comment se passent les visites ?</h2>
+      <h3>Une visite, concrètement</h3>
+      <p>À chaque passage : accueil et contrôle visuel de bonne santé, gamelles vidées et nettoyées, préparation du repas, eau fraîche renouvelée, câlins si l’animal est réceptif, jeux et stimulation. Aucun contact n’est forcé si l’animal se montre réticent.</p>
+
+      <h3>Nos services en un coup d’œil</h3>
+      <table>
+        <thead>
+          <tr><th>Service</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Visites à domicile</strong></td><td><strong>Présence</strong> : une visite d’environ 30 minutes, comprenant une sortie hygiénique pour le chien (environ 10 minutes ou plus).</td></tr>
+          <tr><td><strong>Promenades</strong></td><td><strong>Grand Air</strong> : marche exclusive et passage au domicile.</td></tr>
+          <tr><td><strong>Forfaits 7 jours</strong></td><td>Présence, Sérénité et Grand Air, avec 10 % de remise.</td></tr>
+          <tr><td><strong>Équidés</strong></td><td>Visites au pré, au paddock ou avec box, ainsi que la formule Tout-en-un.</td></tr>
+          <tr><td><strong>Transport et accompagnement</strong></td><td>Accompagnement vétérinaire, temps d’attente et transferts longue distance.</td></tr>
+          <tr><td><strong>Options</strong></td><td>Maison Veillée et nettoyage spécialisé de vivarium, aquarium ou bassin.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="tarifs">
+      <h2>3. Grille tarifaire – animaux de compagnie</h2>
+      <h3>Visite à la carte</h3>
+      <table>
+        <thead>
+          <tr><th>Prestation</th><th>Détails</th><th>Tarif</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Présence</strong></td>
+            <td>Environ 30 min. Nettoyage des gamelles, nourriture, eau fraîche et jeux. Base : 1 animal par foyer. Supplément : 10 € par chien supplémentaire, 5 € par chat ou NAC.</td>
+            <td><span class="price">20 €</span><small>par visite</small></td>
+          </tr>
+          <tr>
+            <td><strong>Grand Air</strong></td>
+            <td>30 min de marche exclusive + 15 min au domicile (gamelles, nourriture et eau fraîche).</td>
+            <td><span class="price">35 €</span><small>par marche</small></td>
+          </tr>
+          <tr>
+            <td><strong>Chien supplémentaire (Grand Air)</strong></td>
+            <td>Sous conditions : chiens éduqués et compatibles avec la promenade.</td>
+            <td><span class="price">+15 €</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="forfaits">
+      <h2>4. Forfaits de 7 jours et plus – 10 % de remise</h2>
+      <table>
+        <thead>
+          <tr><th>Prestation</th><th>Détails</th><th>Tarif</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Présence – 1 visite par jour</strong></td>
+            <td>Environ 30 min, matin ou soir. Rituels quotidiens, gamelles, nourriture, eau fraîche et jeux. Vidéo quotidienne et grand nettoyage hebdomadaire de l’habitat (caisse, litière, niche ou cage).</td>
+            <td><span class="price">126 €</span><small>par semaine, au lieu de 140 €</small></td>
+          </tr>
+          <tr>
+            <td><strong>Sérénité – 2 visites par jour</strong></td>
+            <td>Matin et soir. Rituels quotidiens, gamelles, nourriture, eau fraîche et jeux. Vidéo quotidienne et grand nettoyage hebdomadaire de l’habitat.</td>
+            <td><span class="price">252 €</span><small>par semaine, au lieu de 280 €</small></td>
+          </tr>
+          <tr>
+            <td><strong>Grand Air – 2 visites par jour</strong></td>
+            <td>Deux marches exclusives de 30 min et deux passages de 15 min au domicile. Nettoyage des gamelles, nourriture et eau fraîche.</td>
+            <td><span class="price">441 €</span><small>par semaine, au lieu de 490 €</small></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">10 % de remise sur les forfaits de 7 jours. Les forfaits Présence et Sérénité sont calculés sur la base d’un animal par foyer. Suppléments : +10 €/jour par chien supplémentaire ; +5 €/jour par chat ou NAC supplémentaire.</p>
+      <p><strong>Votre Journal de Bord souvenir.</strong> À l’issue de chaque forfait, un compte rendu détaillé retrace le déroulement du séjour, les habitudes observées, les moments de complicité et le suivi bien-être de vos protégés.</p>
+    </section>
+
+    <section id="equides">
+      <h2>5. Équidés et forfaits combinés</h2>
+      <table>
+        <thead>
+          <tr><th>Prestation</th><th>Détails</th><th>Tarif</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Visite au pré ou paddock</strong></td>
+            <td>Environ 30 min.</td>
+            <td><span class="price">35 €</span></td>
+          </tr>
+          <tr>
+            <td><strong>Visite avec box</strong></td>
+            <td>Nettoyage des crottins et paillage. Environ 50 min.</td>
+            <td><span class="price">49 €</span></td>
+          </tr>
+          <tr>
+            <td><strong>Deuxième équidé du même site</strong></td>
+            <td>Supplément.</td>
+            <td><span class="price">+12 €</span></td>
+          </tr>
+          <tr>
+            <td><strong>Forfait 7 jours – 1 passage par jour</strong></td>
+            <td>Visite quotidienne. Remise de 10 % incluse.</td>
+            <td><span class="price">220 €</span><small>par semaine</small></td>
+          </tr>
+          <tr>
+            <td><strong>Forfait 7 jours – 2 passages par jour</strong></td>
+            <td>Deux visites quotidiennes. Remise de 10 % incluse.</td>
+            <td><span class="price">440 €</span><small>par semaine</small></td>
+          </tr>
+          <tr>
+            <td><strong>Équidé – 2 visites par jour</strong></td>
+            <td>Contrôle de santé, nourrissage, eau, clôtures, ramassage des crottins, paillage deux fois par jour et deux nettoyages complets (curage) par semaine.</td>
+            <td><span class="price">À partir de 680 €</span><small>par semaine</small></td>
+          </tr>
+          <tr>
+            <td><strong>Tout-en-un</strong></td>
+            <td>Visite d’un équidé au pré + prise en charge des autres animaux du même site (3 maximum, dans la limite de 15 min supplémentaires).</td>
+            <td><span class="price">49 €</span><small>par visite</small></td>
+          </tr>
+        </tbody>
+      </table>
+      <ul>
+        <li>Pour les prestations équidés avec box et les forfaits, le tarif est à ajuster selon le box, l’effectif et la distance. Suppléments et conditions précisés au devis.</li>
+        <li>La litière (paille ou copeaux) est fournie par le propriétaire, avec brouette et fourche sur place.</li>
+        <li>Le « nettoyage complet » signifie : box vidé, balayé, litière propre, dans la limite de 60 min. Au-delà, devis.</li>
+        <li>Les tâches équines particulières font l’objet d’un accord et d’un devis tenant compte du temps réel.</li>
+        <li>Prestations équines sous réserve des compétences, assurances et conditions réglementaires applicables.</li>
+      </ul>
+    </section>
+
+    <section id="transport">
+      <h2>6. Transport, accompagnement et options</h2>
+      <table>
+        <thead>
+          <tr><th>Prestation</th><th>Détails</th><th>Tarif</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Transport et accompagnement vétérinaire</strong></td>
+            <td>Trajet de proximité dans un véhicule préparé et sécurisé. Facturation dès le premier kilomètre.</td>
+            <td><span class="price">0,49 € / km</span><small>+ 0,62 € / min</small></td>
+          </tr>
+          <tr>
+            <td><strong>Temps d’attente</strong></td>
+            <td>Prise en charge et surveillance de l’animal sur place lors d’un rendez-vous vétérinaire, toiletteur, etc. Toute demi-heure entamée est due.</td>
+            <td><span class="price">15 €</span><small>par 30 min</small></td>
+          </tr>
+          <tr>
+            <td><strong>Transferts longue distance</strong></td>
+            <td>Gares, aéroports, cliniques spécialisées. Barème kilométrique réel et temps de conduite facturé à demi-tarif. Péages et parkings en frais réels.</td>
+            <td><span class="price">Sur devis</span></td>
+          </tr>
+          <tr>
+            <td><strong>Nettoyage spécialisé</strong></td>
+            <td>Vivarium, aquarium ou bassin.</td>
+            <td><span class="price">Sur devis</span></td>
+          </tr>
+          <tr>
+            <td><strong>Option Maison Veillée</strong></td>
+            <td>Relevé du courrier, arrosage des plantes, ouverture et fermeture des volets selon consignes, contrôle visuel simple des accès et signalement des anomalies visibles. Réalisée pendant un passage déjà prévu. Ce n’est ni du gardiennage, ni une garantie de sécurité.</td>
+            <td><span class="price">+15 €</span><small>par séjour</small></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Une demande particulière ? Une prestation personnalisée peut être étudiée sur devis.</p>
+    </section>
+
+    <section id="cgv">
+      <h2>7. Conditions générales, déplacements et mentions légales</h2>
+      <h3>Précisions commerciales (CGV)</h3>
+      <ul>
+        <li><strong>Base :</strong> 1 animal par foyer. À partir du 2e animal : +10 €/jour par chien ; +5 €/jour par chat ou NAC.</li>
+        <li><strong>Suivi quotidien :</strong> Les vidéos et comptes rendus quotidiens sont réservés aux forfaits qui les prévoient expressément. Les prestations ponctuelles n’en comprennent pas.</li>
+        <li><strong>Entretien :</strong> Le nettoyage concerne l’habitat de l’animal, pas le ménage général du logement.</li>
+        <li><strong>Validation :</strong> Les prestations spécifiques et les frais complémentaires sont confirmés au devis avant intervention.</li>
+        <li><strong>Fiscalité :</strong> Tarifs en euros. TVA non applicable, art. 293 B du CGI.</li>
+      </ul>
+
+      <h3>Frais de déplacement</h3>
+      <ul>
+        <li><strong>Jusqu’à 20 km aller-retour</strong> entre ma base à Sisteron et votre domicile : <strong>déplacements offerts</strong>.</li>
+        <li><strong>Au-delà des 20 premiers km :</strong> 0,49 €/km + 0,62 €/min (distances calculées par la route, itinéraire le plus court).</li>
+        <li><strong>Dimanches et jours fériés :</strong> Prestations à la carte majorées de +10 € par intervention (+25 % pour les transports et temps d’attente). Aucune majoration pour les forfaits.</li>
+      </ul>
+
+      <h3>Comment réserver ?</h3>
+      <ol>
+        <li><strong>Vous remplissez la demande de réservation.</strong> Aucun paiement à cette étape.</li>
+        <li><strong>Je vous rappelle sous 24 h.</strong> Nous fixons la rencontre préalable, offerte : mise en place du protocole et des consignes.</li>
+        <li><strong>Vous recevez votre devis sous 24 h après la rencontre</strong>, avec les conditions générales de vente complètes. Vous me retournez l’ensemble des documents demandés, datés et signés.</li>
+        <li><strong>Vous partez l’esprit tranquille.</strong> Pour les forfaits, une courte vidéo vous est transmise chaque jour, selon votre choix : WhatsApp ou SMS.</li>
+      </ol>
+      <p class="note">Je limite le nombre de familles accompagnées en même temps pour rester pleinement présent avec les vôtres.</p>
+
+      <div class="qualif-box">
+        <strong>Qualifications reconnues par l’État :</strong>
+        <ul>
+          <li>Attestation de Connaissances pour les Animaux de Compagnie d’Espèces Domestiques (<strong>ACACED</strong>) – Options Chien, Chat et NAC.</li>
+          <li>Certificat de compétence pour le Transport d’Animaux Vivants (<strong>TAV</strong>).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <h2>8. Contacts et informations légales</h2>
+      <div class="contact-card">
+        <p><strong>Maison Faune · Demis Cervotti</strong> (Entrepreneur individuel)</p>
+        <p><strong>Zone d’intervention :</strong> Sisteron (04200) et alentours</p>
+        <p><strong>Téléphone :</strong> <a href="tel:0756802918">07 56 80 29 18</a> (joignable 7j/7 de 8 h à 20 h)</p>
+        <p><strong>Courriel :</strong> <a href="mailto:info@maisonfaune.fr">info@maisonfaune.fr</a></p>
+        <p><strong>Site internet :</strong> <a href="https://www.maisonfaune.fr">www.maisonfaune.fr</a></p>
+        <p class="note">TVA non applicable, art. 293 B du CGI · Médiateur de la consommation et Conditions Générales de Vente complètes remis en annexe de chaque devis.</p>
+      </div>
+    </section>
+
+    <section id="reservation">
+      <h2>9. Demande de réservation en ligne</h2>
+      <p>Remplissez ce formulaire sans engagement (aucun paiement requis). Votre demande préparera automatiquement votre message à destination de <strong>info@maisonfaune.fr</strong> et je vous recontacterai sous 24 h.</p>
+
+      <form id="bookingForm" onsubmit="sendReservation(event)">
+        <fieldset>
+          <legend>Vos coordonnées</legend>
+          <div class="g">
+            <label>Nom et prénom *
+              <input type="text" id="nom" required placeholder="Ex. Marie Dupont">
+            </label>
+            <label>Téléphone *
+              <input type="tel" id="tel" required placeholder="Ex. 06 12 34 56 78">
+            </label>
+            <label>Adresse e-mail *
+              <input type="email" id="email" required placeholder="Ex. marie@exemple.fr">
+            </label>
+            <label>Commune d’intervention *
+              <input type="text" id="ville" required placeholder="Ex. Sisteron, Peipin, Volonne...">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Votre besoin et vos protégés</legend>
+          <div class="g">
+            <label>Prestation souhaitée *
+              <select id="prestation" required>
+                <option value="">-- Choisissez une formule --</option>
+                <option value="Visite Présence (20 €)">Visite Présence à la carte (20 €)</option>
+                <option value="Promenade Grand Air (35 €)">Promenade Grand Air (35 €)</option>
+                <option value="Forfait 7 jours Présence (126 €)">Forfait 7 jours – Présence (126 €)</option>
+                <option value="Forfait 7 jours Sérénité (252 €)">Forfait 7 jours – Sérénité (252 €)</option>
+                <option value="Forfait 7 jours Grand Air (441 €)">Forfait 7 jours – Grand Air (441 €)</option>
+                <option value="Prestation Équidés">Prestation Équidés (pré, box ou forfait)</option>
+                <option value="Transport / Accompagnement vétérinaire">Transport / Accompagnement vétérinaire</option>
+                <option value="Demande sur devis">Autre demande / Devis personnalisé</option>
+              </select>
+            </label>
+            <label>Animaux concernés *
+              <input type="text" id="animaux" required placeholder="Ex. 1 chien, 2 chats, 1 cheval...">
+            </label>
+            <label>Date de début souhaitée
+              <input type="date" id="dateDebut">
+            </label>
+            <label>Date de fin souhaitée
+              <input type="date" id="dateFin">
+            </label>
+          </div>
+          <label class="c" style="margin-top:0.8rem;">
+            <input type="checkbox" id="maisonVeillee">
+            <span>Ajouter l’option <strong>Maison Veillée</strong> (+15 € par séjour : courrier, plantes, volets)</span>
+          </label>
+          <label style="margin-top:0.8rem;">Précisions complémentaires (habitudes, soins, horaires...)
+            <textarea id="message" placeholder="Indiquez toute information utile sur vos compagnons..."></textarea>
+          </label>
+        </fieldset>
+        <button type="submit" class="submit-btn">Envoyer ma demande de réservation</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
     <div class="w">
+      <img src="chouette.png" alt="Emblème Maison Faune" class="owl-emblem">
+      <p class="footer-tagline">LA CONCIERGERIE POUR VOS PROTÉGÉS</p>
+      <p><strong>MAISON FAUNE</strong> · Sisteron et alentours</p>
+      <p>Demis Cervotti · 07 56 80 29 18 · <a href="mailto:info@maisonfaune.fr">info@maisonfaune.fr</a> · <a href="https://www.maisonfaune.fr">www.maisonfaune.fr</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('dropdownMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('dropdownMenu').classList.remove('open');
+    }
+    document.addEventListener('click', function(event) {
+      var menuBox = document.getElementById('menuBox');
+      if (!menuBox.contains(event.target)) {
+        closeMenu();
+      }
+    });
+
+    function sendReservation(e) {
+      e.preventDefault();
+      var nom = document.getElementById('nom').value;
+      var tel = document.getElementById('tel').value;
+      var email = document.getElementById('email').value;
+      var ville = document.getElementById('ville').value;
+      var prestation = document.getElementById('prestation').value;
+      var animaux = document.getElementById('animaux').value;
+      var dateDebut = document.getElementById('dateDebut').value || 'Non précisée';
+      var dateFin = document.getElementById('dateFin').value || 'Non précisée';
+      var maisonVeillee = document.getElementById('maisonVeillee').checked ? 'Oui (+15 €)' : 'Non';
+      var message = document.getElementById('message').value || 'Aucune précision supplémentaire';
+
+      var sujet = encodeURIComponent('Demande de réservation Maison Faune - ' + nom);
+      var corps = encodeURIComponent(
+        'Bonjour,\n\nJe souhaite effectuer une demande de réservation auprès de Maison Faune :\n\n' +
+        '• Nom et prénom : ' + nom + '\n' +
+        '• Téléphone : ' + tel + '\n' +
+        '• E-mail : ' + email + '\n' +
+        '• Commune : ' + ville + '\n' +
+        '• Prestation souhaitée : ' + prestation + '\n' +
+        '• Animaux : ' + animaux + '\n' +
+        '• Du : ' + dateDebut + ' au ' + dateFin + '\n' +
+        '• Option Maison Veillée : ' + maisonVeillee + '\n\n' +
+        'Précisions complémentaires :\n' + message + '\n\nCordialement.'
+      );
+
+      window.location.href = 'mailto:info@maisonfaune.fr?subject=' + sujet + '&body=' + corps;
+    }
+  </script>
+
+</body>
+</html>
