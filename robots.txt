@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.maisonfaune.fr/sitemap.xml
